@@ -3,6 +3,8 @@ const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const JWT_SECERT = require("../../server/config/keys").JWT_SECRET;
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
 const { User } = require("../../models/User");
 
 const router = express.Router();
@@ -14,9 +16,16 @@ const router = express.Router();
 router.get("/test", (req, res) => res.json({ message: "Users works!" }));
 
 router.post("/register", (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      return res.status(400).json({ err: "User Already Exists" });
+      errors.email = "User Already Exists";
+      return res.status(400).json(errors);
     }
 
     const avatar = gravatar.url(req.body.email, {
@@ -40,6 +49,12 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   var email = req.body.email;
   var password = req.body.password;
 
@@ -59,7 +74,8 @@ router.post("/login", (req, res) => {
       });
     })
     .catch(err => {
-      res.status(404).json({ msg: "Email Or Password is wrong" });
+      errors.name = "Email Or Password is wrong";
+      res.status(404).json({ errors });
     });
 });
 
