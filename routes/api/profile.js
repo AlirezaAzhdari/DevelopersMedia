@@ -1,10 +1,12 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const passport = require("passport");
+const _ = require("lodash");
 const { Profile } = require("../../models/Profile");
 const { User } = require("../../models/User");
 const validateProfileInput = require("../../validation/profile");
 const validateExperienceInput = require("../../validation/experience");
+const validateEducationInput = require("../../validation/education");
+const isEmpty = require("../../validation/is-empty");
 
 const router = express.Router();
 
@@ -161,25 +163,120 @@ router.post(
           return res.status(404).json(errors);
         }
 
-        var result = profile.experience.filter(
+        var _result = {};
+        _result = profile.experience.filter(
           exp =>
-            exp.title === req.body.title &&
-            exp.company === req.body.company &&
-            exp.from === req.body.from
+            exp.title.toUpperCase() === req.body.title.toUpperCase() &&
+            exp.company.toUpperCase() === req.body.company.toUpperCase()
         );
 
-        console.log(result.title);
-
-        if (result.title) {
+        if (!isEmpty(_result)) {
           errors.duplicateExperience =
             "an experience with this title, company name and start date, already exists";
           return res.status(400).json(errors);
         }
 
-        profile.experience.push(experienceFields);
+        profile.experience.unshift(experienceFields);
         profile.save().then(profile => res.json(profile));
       })
       .catch(err => res.status(400).json(err));
+  }
+);
+
+router.post(
+  "/education",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateEducationInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    educationFields = {};
+    educationFields.school = req.body.school;
+    educationFields.degree = req.body.degree;
+    educationFields.from = req.body.from;
+    educationFields.fieldOfStudy = req.body.fieldOfStudy;
+    if (req.body.location) educationFields.fieldOfStudy = req.body.fieldOfStudy;
+    if (req.body.to) educationFields.to = req.body.to;
+    if (req.body.date) educationFields.description = req.body.description;
+    if (req.body.current) educationFields.current = req.body.current;
+
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = "there is no profile for this user";
+          return res.status(404).json(errors);
+        }
+
+        var _result = {};
+        _result = profile.education.filter(
+          edu =>
+            edu.school.toUpperCase() === req.body.school.toUpperCase() &&
+            edu.degree.toUpperCase() === req.body.degree.toUpperCase()
+        );
+
+        if (!isEmpty(_result)) {
+          errors.duplicateEducation =
+            "an education with this school, degree name and start date, already exists";
+          return res.status(400).json(errors);
+        }
+
+        profile.education.unshift(educationFields);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(400).json(err));
+  }
+);
+
+router.delete(
+  "/experience/:exp_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    var errors = {};
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = "there is no profile for this user";
+          return res.status(404).json(errors);
+        }
+
+        _.remove(profile.experience, exp => exp.id === req.params.exp_id);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(400).json(err));
+  }
+);
+
+router.delete(
+  "/education/:edu_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    var errors = {};
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = "there is no profile for this user";
+          return res.status(404).json(errors);
+        }
+
+        _.remove(profile.education, exp => exp.id === req.params.edu_id);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(400).json(err));
+  }
+);
+
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
+      User.findOneAndRemove({ _id: req.user.id }).then(() =>
+        res.json({ success: true })
+      );
+    });
   }
 );
 

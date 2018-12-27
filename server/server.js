@@ -9,7 +9,7 @@ const profile = require("./../routes/api/profile");
 const posts = require("./../routes/api/posts");
 
 var app = express();
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5000;
 
 app.use(passport.initialize());
 require("./config/passport")(passport);
