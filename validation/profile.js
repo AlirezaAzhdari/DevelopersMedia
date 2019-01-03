@@ -9,54 +9,54 @@ module.exports = function validateProfileInput(data) {
   data.skills = !isEmpty(data.skills) ? data.skills : "";
 
   if (!validator.isLength(data.handle, { min: 4, max: 40 })) {
-    errors.handle = "handle must be between 4 and 40 characters";
+    errors.handle = "طول هندل باید بین ۴ تا ۴۰ کاراکتر باشد";
   }
 
   if (validator.isEmpty(data.handle)) {
-    errors.handle = "handle field is required";
+    errors.handle = "فیلد هندل نمی‌تواند خالی باشد";
   }
 
   if (validator.isEmpty(data.status)) {
-    errors.status = "status field is required";
+    errors.status = "فیلد وضعیت نمی‌تواند خالی باشد";
   }
 
   if (validator.isEmpty(data.skills)) {
-    errors.skills = "skills field is required";
+    errors.skills = "فیلد مهارت‌ها نمی‌تواند خالی باشد";
   }
 
   if (!isEmpty(data.website)) {
     if (!validator.isURL(data.website)) {
-      errors.website = "Invalid Url";
+      errors.website = "آدرس نا معتبر";
     }
   }
 
   if (!isEmpty(data.linkedin)) {
     if (!validator.isURL(data.linkedin)) {
-      errors.linkedin = "Invalid Url";
+      errors.linkedin = "آدرس نا معتبر";
     }
   }
 
   if (!isEmpty(data.twitter)) {
     if (!validator.isURL(data.twitter)) {
-      errors.twitter = "Invalid Url";
+      errors.twitter = "آدرس نا معتبر";
     }
   }
 
   if (!isEmpty(data.facebook)) {
     if (!validator.isURL(data.facebook)) {
-      errors.facebook = "Invalid Url";
+      errors.facebook = "آدرس نا معتبر";
     }
   }
 
   if (!isEmpty(data.youtube)) {
     if (!validator.isURL(data.youtube)) {
-      errors.youtube = "Invalid Url";
+      errors.youtube = "آدرس نا معتبر";
     }
   }
 
   if (!isEmpty(data.instagram)) {
     if (!validator.isURL(data.instagram)) {
-      errors.instagram = "Invalid Url";
+      errors.instagram = "آدرس نا معتبر";
     }
   }
 

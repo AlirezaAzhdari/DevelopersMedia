@@ -75,7 +75,7 @@ router.post(
           ) {
             return res
               .status(400)
-              .json({ alreadyliked: "you already liked this post" });
+              .json({ alreadyliked: "قبلا این پست را لایک کردید" });
           }
 
           post.likes.unshift({ user: req.user.id });
@@ -100,7 +100,7 @@ router.post(
           ) {
             return res
               .status(400)
-              .json({ alreadyliked: "you have not liked this post" });
+              .json({ alreadyliked: "شما این پست را لایک نکردید" });
           }
 
           _.remove(post.likes, like => like.user.toString() === req.user.id);
@@ -147,7 +147,7 @@ router.delete(
           ).length === 0
         ) {
           return res.status(400).json({
-            nocomment: "you have not post a comment for this post."
+            nocomment: "کامنتی برای این پست نگذاشته‌اید"
           });
         }
 

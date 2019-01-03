@@ -10,19 +10,19 @@ module.exports = function validateEducationInput(data) {
   data.from = !isEmpty(data.from) ? data.from : "";
 
   if (validator.isEmpty(data.school)) {
-    errors.school = "school field is required";
+    errors.school = "فیلد دانشگاه نمی‌تواند خالی باشد";
   }
 
   if (validator.isEmpty(data.fieldOfStudy)) {
-    errors.fieldOfStudy = "fieldOfStudy field is required";
+    errors.fieldOfStudy = "فیلد رشته نمی‌تواند خالی باشد";
   }
 
   if (validator.isEmpty(data.degree)) {
-    errors.degree = "degree field is required";
+    errors.degree = "فیلد مدرک نمی‌تواند خالی باشد";
   }
 
   if (validator.isEmpty(data.from)) {
-    errors.from = "from field is required";
+    errors.from = "فیلد تاریخ شروع نمی‌تواند خالی باشد";
   }
 
   return {

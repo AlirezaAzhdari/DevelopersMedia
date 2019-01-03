@@ -9,12 +9,6 @@ const { User } = require("../../models/User");
 
 const router = express.Router();
 
-// @Route    Get api/users/test
-// @desc     Tests users route
-// @access   Public
-
-router.get("/test", (req, res) => res.json({ message: "Users works!" }));
-
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -24,7 +18,7 @@ router.post("/register", (req, res) => {
 
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      errors.email = "User Already Exists";
+      errors.email = "یک حساب کاربری با این مشخصات موجود است";
       return res.status(400).json(errors);
     }
 
@@ -58,7 +52,7 @@ router.post("/login", (req, res) => {
   var email = req.body.email;
   var password = req.body.password;
 
-  User.findByCredentials(email, password)
+  User.findByCredentials(email, password, errors)
     .then(user => {
       var payLoad = {
         id: user.id,
@@ -74,8 +68,7 @@ router.post("/login", (req, res) => {
       });
     })
     .catch(err => {
-      errors.name = "Email Or Password is wrong";
-      res.status(404).json({ errors });
+      res.status(404).json(errors);
     });
 });
 

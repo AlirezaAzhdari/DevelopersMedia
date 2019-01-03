@@ -7,11 +7,11 @@ module.exports = function validateCommentInput(data) {
   data.text = !isEmpty(data.text) ? data.text : "";
 
   if (validator.isEmpty(data.text)) {
-    errors.text = "comment field is required";
+    errors.text = "فیلد کامنت نمی‌تواند خالی باشد";
   }
 
   if (!validator.isLength(data.text, { min: 2, max: 300 })) {
-    errors.text = "comment's length must be between 2 and 300 characters.";
+    errors.text = "طول کامنت باید بین ۲ تا ۳۰۰ کاراکتر باشد";
   }
 
   return {

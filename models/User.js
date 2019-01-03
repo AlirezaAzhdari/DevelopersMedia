@@ -32,11 +32,12 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
-UserSchema.statics.findByCredentials = function(email, password) {
+UserSchema.statics.findByCredentials = function(email, password, errors) {
   User = this;
   return User.findOne({ email })
     .then(user => {
       if (!user) {
+        errors.email = "کاربری با این ایمیل یافت نشد";
         return Promise.reject();
       }
 
@@ -45,6 +46,7 @@ UserSchema.statics.findByCredentials = function(email, password) {
           if (res) {
             resolve(user);
           } else {
+            errors.password = "پسوورد اشتباه است";
             reject();
           }
         });

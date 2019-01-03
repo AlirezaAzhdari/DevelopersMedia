@@ -10,12 +10,6 @@ const isEmpty = require("../../validation/is-empty");
 
 const router = express.Router();
 
-// @Route    Get api/profile/test
-// @desc     Tests profile route
-// @access   Public
-
-router.get("/test", (req, res) => res.json({ message: "profile works!" }));
-
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
@@ -26,7 +20,7 @@ router.get(
       .populate("user", ["name", "avatar"])
       .then(profile => {
         if (!profile) {
-          errors.noprofile = "there is no profile for this user";
+          errors.noprofile = "پروفایلی برای این کاربر وجود ندارد";
           return res.status(404).json(errors);
         }
 
@@ -44,7 +38,7 @@ router.get("/user/:user_id", (req, res) => {
     .populate("user", ["name", "avatar"])
     .then(profile => {
       if (!profile) {
-        errors.noprofile = "no profile for this user";
+        errors.noprofile = "پروفایلی برای این کاربر وجود ندارد";
         return res.status(404).json(errors);
       }
 
@@ -61,7 +55,7 @@ router.get("/handle/:handle", (req, res) => {
     .populate("user", ["name", "avatar"])
     .then(profile => {
       if (!profile) {
-        errors.noprofile = "no profile for this user";
+        errors.noprofile = "پروفایلی برای این کاربر وجود ندارد";
         return res.status(404).json(errors);
       }
 
@@ -78,7 +72,7 @@ router.get("/all", (req, res) => {
     .populate("user", ["name", "avatar"])
     .then(profiles => {
       if (!profiles) {
-        errors.noprofile = "there is not any profile.";
+        errors.noprofile = "پروفایلی برای این کاربر وجود ندارد";
         return res.status(404).json(errors);
       }
 
@@ -127,7 +121,7 @@ router.post(
       } else {
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
-            errors.handle = "this handle already exists";
+            errors.handle = "این هندل وجود دارد";
             return res.status(400).json(errors);
           }
           new Profile(profileFields).save().then(profile => res.json(profile));
@@ -159,7 +153,7 @@ router.post(
     Profile.findOne({ user: req.user.id })
       .then(profile => {
         if (!profile) {
-          errors.noprofile = "there is no profile for this user";
+          errors.noprofile = "پروفایلی برای این کاربر وجود ندارد";
           return res.status(404).json(errors);
         }
 
@@ -172,7 +166,7 @@ router.post(
 
         if (!isEmpty(_result)) {
           errors.duplicateExperience =
-            "an experience with this title, company name and start date, already exists";
+            "یک تجربه کار با این عنوان، نام شرکت و تاریخ شروع وجود دارد";
           return res.status(400).json(errors);
         }
 
@@ -206,7 +200,7 @@ router.post(
     Profile.findOne({ user: req.user.id })
       .then(profile => {
         if (!profile) {
-          errors.noprofile = "there is no profile for this user";
+          errors.noprofile = "پروفایلی برای این کاربر وجود ندارد";
           return res.status(404).json(errors);
         }
 
@@ -219,7 +213,7 @@ router.post(
 
         if (!isEmpty(_result)) {
           errors.duplicateEducation =
-            "an education with this school, degree name and start date, already exists";
+            "یک تحصیلات با این دانشگاه، مدرک و تاریخ شروع وجود دارد";
           return res.status(400).json(errors);
         }
 
@@ -238,7 +232,7 @@ router.delete(
     Profile.findOne({ user: req.user.id })
       .then(profile => {
         if (!profile) {
-          errors.noprofile = "there is no profile for this user";
+          errors.noprofile = "پروفایلی برای این کاربر وجود ندارد";
           return res.status(404).json(errors);
         }
 
@@ -257,7 +251,7 @@ router.delete(
     Profile.findOne({ user: req.user.id })
       .then(profile => {
         if (!profile) {
-          errors.noprofile = "there is no profile for this user";
+          errors.noprofile = "پروفایلی برای این کاربر وجود ندارد";
           return res.status(404).json(errors);
         }
 

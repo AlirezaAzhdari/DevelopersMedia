@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 class Landing extends Component {
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   render() {
     return (
       <div className="landing">
@@ -9,18 +17,18 @@ class Landing extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
-                <h1 className="display-3 mb-4">Developers Connector</h1>
+                <h1 className="display-3 mb-4">شبکه توسعه دهندگان</h1>
                 <p className="lead">
                   {" "}
-                  Create a developer profile/portfolio, share posts and get help
-                  from other developers
+                  یک حساب کاربری توسعه دهنده بساز، پست بذار، اصلاعاتت رو به
+                  اشتراک بذار و از بقیه توسعه دهنده‌ها در کارهات کمک بگیر
                 </p>
                 <hr />
                 <Link to="/register" className="btn btn-lg btn-info mr-2">
-                  Sign Up
+                  ثبت نام
                 </Link>
                 <Link to="/login" className="btn btn-lg btn-light">
-                  Login
+                  ورود
                 </Link>
               </div>
             </div>
@@ -31,4 +39,14 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+Landing.propTypes = {
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStatetoProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(mapStatetoProps)(Landing);

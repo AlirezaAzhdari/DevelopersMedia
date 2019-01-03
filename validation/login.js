@@ -8,15 +8,15 @@ module.exports = function validateLoginInput(data) {
   data.password = !isEmpty(data.password) ? data.password : "";
 
   if (validator.isEmpty(data.password)) {
-    errors.password = "Password field is required";
+    errors.password = "فیلد پسوورد نمی‌تواند خالی باشد";
   }
 
   if (!validator.isEmail(data.email)) {
-    errors.email = "Email is invalid";
+    errors.email = "ایمیل نا معتبر است";
   }
 
   if (validator.isEmpty(data.email)) {
-    errors.email = "Email field is required";
+    errors.email = "فیلد ایمیل نمی‌تواند خالی باشد";
   }
 
   return {

@@ -10,35 +10,35 @@ module.exports = function validateRegisterInput(data) {
   data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
   if (!validator.isLength(data.name, { min: 2, max: 30 })) {
-    errors.name = "name's length must be between 2 and 30";
+    errors.name = "طول نام باید بین ۲ تا ۳۰ کاراکتر باشد";
   }
 
   if (validator.isEmpty(data.name)) {
-    errors.name = "Name field is required";
-  }
-
-  if (validator.isEmpty(data.email)) {
-    errors.email = "Email field is required";
-  }
-
-  if (validator.isEmpty(data.password)) {
-    errors.password = "Password field is required";
-  }
-
-  if (validator.isEmpty(data.password2)) {
-    errors.password2 = "Confirm password field is required";
-  }
-
-  if (!validator.isLength(data.password, { min: 8, max: 35 })) {
-    errors.password = "Password's length must be between 8 and 35";
-  }
-
-  if (!validator.equals(data.password, data.password2)) {
-    errors.password = "Passwords doesn't match";
+    errors.name = "فیلد نام نمی‌تواند خالی باشد";
   }
 
   if (!validator.isEmail(data.email)) {
-    errors.email = "Email is invalid";
+    errors.email = "ایمیل نا معتبر";
+  }
+
+  if (validator.isEmpty(data.email)) {
+    errors.email = "فیلد ایمیل نمی‌تواند خالی باشد";
+  }
+
+  if (!validator.isLength(data.password, { min: 8, max: 35 })) {
+    errors.password = "طول پسوورد باید بین ۸ تا ۳۵ کاراکتر باشد";
+  }
+
+  if (validator.isEmpty(data.password)) {
+    errors.password = "فیلد پسوورد نمی‌تواند خالی باشد";
+  }
+
+  if (!validator.equals(data.password, data.password2)) {
+    errors.password = "پسووردها یکسان نیستند";
+  }
+
+  if (validator.isEmpty(data.password2)) {
+    errors.password2 = "فیلد تایید پسوورد نمی‌تواند خالی باشد";
   }
 
   return {

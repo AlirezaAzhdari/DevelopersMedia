@@ -7,11 +7,11 @@ module.exports = function validatePostInput(data) {
   data.text = !isEmpty(data.text) ? data.text : "";
 
   if (validator.isEmpty(data.text)) {
-    errors.text = "text field is required";
+    errors.text = "فیلد پست نمی‌تواند خالی باشد";
   }
 
   if (!validator.isLength(data.text, { min: 2, max: 300 })) {
-    errors.text = "text's length must be between 2 and 300 characters.";
+    errors.text = "طول پست باید بین ۲ تا ۳۰۰ کاراکتر باشد";
   }
 
   return {

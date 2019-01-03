@@ -9,15 +9,15 @@ module.exports = function validateExperienceInput(data) {
   data.from = !isEmpty(data.from) ? data.from : "";
 
   if (validator.isEmpty(data.title)) {
-    errors.title = "title field is required";
+    errors.title = "فیلد عنوان نمی‌تواند خالی باشد";
   }
 
   if (validator.isEmpty(data.company)) {
-    errors.company = "company field is required";
+    errors.company = "فیلد شرکت نمی‌تواند خالی باشد";
   }
 
   if (validator.isEmpty(data.from)) {
-    errors.from = "from field is required";
+    errors.from = "فیلد تاریخ شروع نمی‌تواند خالی باشد";
   }
 
   return {
