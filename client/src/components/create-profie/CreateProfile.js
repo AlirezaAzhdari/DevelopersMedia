@@ -143,7 +143,7 @@ class CreateProfile extends Component {
               <p className="lead text-center">
                 اطلاعات خود را برای ساخت پروفایل وارد کنید
               </p>
-              <small className="d-block pb-3">فیلد ضروری = *</small>
+              <small className="d-block pb-3 text-right">فیلد ضروری = *</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="نام کاربری *"
@@ -219,7 +219,7 @@ class CreateProfile extends Component {
                         displaySocialInputs: !prevState.displaySocialInputs
                       }));
                     }}
-                    className="btn btn-light"
+                    className="btn btn-light float-right"
                   >
                     لینک‌ شبکه‌های اجتماعی خود را وارد کنید
                   </button>
