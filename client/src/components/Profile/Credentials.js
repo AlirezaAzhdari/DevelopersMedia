@@ -7,8 +7,8 @@ class Credentials extends Component {
 
     const experiences = experience.map(exp => (
       <li key={exp._id} className="list-group-item">
-        <h4>{exp.company}</h4>
-        <p>
+        <h4 className="text-right">{exp.company}</h4>
+        <p className="text-right">
           <Moment format="YYYY/MM/DD">{exp.from}</Moment> -
           {exp.to === null ? (
             " Now"
@@ -16,21 +16,19 @@ class Credentials extends Component {
             <Moment format="YYYY/MM/DD">{exp.to}</Moment>
           )}
         </p>
-        <p>
-          <strong>عنوان شغلی :</strong>
-          {exp.title}
+        <p className="text-right">
+          {exp.title} <strong> : عنوان شغلی </strong>
         </p>
-        <p>
-          <strong>توضیحات :</strong>
-          {exp.description}
+        <p className="text-right">
+          {exp.description} <strong> : توضیحات </strong>
         </p>
       </li>
     ));
 
     const educations = education.map(edu => (
       <li key={edu._id} className="list-group-item">
-        <h4>{edu.school}</h4>
-        <p>
+        <h4 className="text-right">{edu.school}</h4>
+        <p className="text-right">
           <Moment format="YYYY/MM/DD">{edu.from}</Moment> -
           {edu.to === null ? (
             " Now"
@@ -38,14 +36,14 @@ class Credentials extends Component {
             <Moment format="YYYY/MM/DD">{edu.to}</Moment>
           )}
         </p>
-        <p>
-          <strong>رشته :</strong> {edu.fieldOfStudy}
+        <p className="text-right">
+          {edu.fieldOfStudy} <strong>: رشته </strong>
         </p>
-        <p>
-          <strong>مدرک :</strong> {edu.degree}
+        <p className="text-right">
+          {edu.degree} <strong> : مدرک </strong>
         </p>
-        <p>
-          <strong>توضیحات :</strong> {edu.description}
+        <p className="text-right">
+          {edu.description} <strong> : توضیحات </strong>
         </p>
       </li>
     ));

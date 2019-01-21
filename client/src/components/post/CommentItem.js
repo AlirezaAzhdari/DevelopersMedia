@@ -26,7 +26,7 @@ class CommentItem extends Component {
             <p className="text-center">{comment.name}</p>
           </div>
           <div className="col-md-10">
-            <p className="lead">{comment.text}</p>
+            <p className="lead text-right">{comment.text}</p>
             {comment.user === auth.user.id ? (
               <button
                 className="btn btn-danger mr-1"

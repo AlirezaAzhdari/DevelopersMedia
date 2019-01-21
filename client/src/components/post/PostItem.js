@@ -31,12 +31,12 @@ class PostItem extends Component {
   render() {
     const { post, auth, showAction } = this.props;
     return (
-      <div className="card card-body mb-3">
+      <div className="card card-body mb-3 ">
         <div className="row">
           <div className="col-md-2">
             <Link to="/profile">
               <img
-                className="rounded-circle d-none d-md-block"
+                className="rounded-circle d-none d-md-block "
                 src={post.avatar}
                 alt={post.name}
               />
@@ -45,7 +45,7 @@ class PostItem extends Component {
             <p className="text-center">{post.name}</p>
           </div>
           <div className="col-md-10">
-            <p className="lead">{post.text}</p>
+            <p className="lead text-right">{post.text}</p>
             {showAction ? (
               <span>
                 <button

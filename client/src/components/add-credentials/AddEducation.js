@@ -76,7 +76,7 @@ class AddEducation extends Component {
                 هر سابقه تحصیلی در دانشگاه، موسسات آموزشی یا آموزشگاه‌ها دارید،
                 وارد کنید
               </p>
-              <small className="d-block pb-3">فیلد ضروری = *</small>
+              <small className="d-block pb-3 text-right">فیلد ضروری = *</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   type="text"
@@ -105,7 +105,7 @@ class AddEducation extends Component {
                   error={errors.school}
                 />
 
-                <h6>تاریخ شروع</h6>
+                <h6 className="text-right">تاریخ شروع</h6>
                 <TextFieldGroup
                   type="date"
                   name="from"
@@ -113,7 +113,7 @@ class AddEducation extends Component {
                   value={this.state.from}
                   error={errors.from}
                 />
-                <h6>تاریخ پایان</h6>
+                <h6 className="text-right">تاریخ پایان</h6>
                 <TextFieldGroup
                   type="date"
                   name="to"
@@ -123,7 +123,7 @@ class AddEducation extends Component {
                   disabled={this.state.disabled ? "disabled" : ""}
                 />
 
-                <div class="form-check mb-4">
+                <div class="form-check mb-4 float-right">
                   <input
                     class="form-check-input"
                     type="checkbox"
@@ -133,7 +133,7 @@ class AddEducation extends Component {
                     onChange={this.onCheck}
                     id="current"
                   />
-                  <label class="form-check-label" htmlFor="current">
+                  <label class="form-check-label text-right" htmlFor="current">
                     در حال تحصیل
                   </label>
                 </div>

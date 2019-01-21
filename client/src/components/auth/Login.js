@@ -61,7 +61,7 @@ class Login extends Component {
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   type="email"
-                  placeholder="Email Address"
+                  placeholder="ایمیل"
                   name="email"
                   value={this.state.email}
                   onChange={this.onChange}
@@ -70,7 +70,7 @@ class Login extends Component {
 
                 <TextFieldGroup
                   type="password"
-                  placeholder="password"
+                  placeholder="رمز ورود"
                   name="password"
                   value={this.state.password}
                   onChange={this.onChange}

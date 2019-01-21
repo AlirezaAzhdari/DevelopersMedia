@@ -61,7 +61,7 @@ class Register extends Component {
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   type="text"
-                  placeholder="Name"
+                  placeholder="نام"
                   name="name"
                   value={this.state.name}
                   onChange={this.onChange}
@@ -70,7 +70,7 @@ class Register extends Component {
 
                 <TextFieldGroup
                   type="email"
-                  placeholder="Email Address"
+                  placeholder="ایمیل"
                   name="email"
                   value={this.state.email}
                   onChange={this.onChange}
@@ -80,7 +80,7 @@ class Register extends Component {
 
                 <TextFieldGroup
                   type="password"
-                  placeholder="Password"
+                  placeholder="رمز ورود"
                   name="password"
                   value={this.state.password}
                   onChange={this.onChange}
@@ -89,7 +89,7 @@ class Register extends Component {
 
                 <TextFieldGroup
                   type="password"
-                  placeholder="Confirm Password"
+                  placeholder="تکرار رمز ورود"
                   name="password2"
                   value={this.state.password2}
                   onChange={this.onChange}

@@ -1,9 +1,9 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Sarabun", sans-serif, "Amiri",
-    serif, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue";
+  font-family: "B Homa";
+  src: url("./fonts/BHoma.eot?#"), format("eot"), url("./fonts/BHoma.woff"),
+    format("woff"), url("./fonts/BHoma.ttf"), format("truetype");
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -12,3 +12,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* font-family: -apple-system, BlinkMacSystemFont, "Sarabun", sans-serif, "Amiri",
+  serif, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+  "Droid Sans", "Helvetica Neue"; */

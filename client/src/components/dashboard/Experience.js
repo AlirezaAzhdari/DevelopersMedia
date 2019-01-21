@@ -34,13 +34,14 @@ class Experience extends Component {
     ));
     return (
       <div>
-        <h4 className="mb-4">سوابق شغلی</h4>
-        <table className="table">
+        <h4 className="mb-4 text-right">سوابق شغلی</h4>
+        <table className="table text-right">
           <thead>
             <tr>
+              <th>تاریخ</th>
               <th>شرکت</th>
               <th>عنوان شغلی</th>
-              <th>تاریخ</th>
+
               <th />
             </tr>
             {experience}

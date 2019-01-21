@@ -8,7 +8,7 @@ class About extends Component {
 
     const skills = profile.skills.map((skill, index) => (
       <div key={index} className="p-3">
-        <i className="fa fa-check" /> {skill}
+        <i className="fa fa-check " /> {skill}
       </div>
     ));
 
@@ -29,7 +29,7 @@ class About extends Component {
             <hr />
             <h3 className="text-center text-info">مهارت‌ها</h3>
             <div className="row">
-              <div className="d-flex flex-wrap justify-content-center align-items-center">
+              <div className="d-flex flex-wrap justify-content-center align-items-center ">
                 {skills}
               </div>
             </div>
