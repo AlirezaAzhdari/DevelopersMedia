@@ -97,8 +97,8 @@ router.post(
     if (req.body.website) profileFields.website = req.body.website;
     if (req.body.location) profileFields.location = req.body.location;
     if (req.body.status) profileFields.status = req.body.status;
-    if (req.body.githubUsername)
-      profileFields.githubUsername = req.body.githubUsername;
+    if (req.body.githubusername)
+      profileFields.githubusername = req.body.githubusername;
     if (typeof req.body.skills !== "undefined") {
       profileFields.skills = req.body.skills.split(",");
     }
@@ -121,7 +121,7 @@ router.post(
       } else {
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
-            errors.handle = "این هندل وجود دارد";
+            errors.handle = "این نام کاربری وجود دارد";
             return res.status(400).json(errors);
           }
           new Profile(profileFields).save().then(profile => res.json(profile));
@@ -231,12 +231,22 @@ router.delete(
     var errors = {};
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        if (!profile) {
-          errors.noprofile = "پروفایلی برای این کاربر وجود ندارد";
-          return res.status(404).json(errors);
-        }
+        // if (!profile) {
+        //   errors.noprofile = "پروفایلی برای این کاربر وجود ندارد";
+        //   return res.status(404).json(errors);
+        // }
 
-        _.remove(profile.experience, exp => exp.id === req.params.exp_id);
+        // _.remove(profile.experience, exp => exp.id === req.params.exp_id);
+        // profile.save().then(profile => res.json(profile));
+
+        const removeIndex = profile.experience
+          .map(item => item.id)
+          .indexOf(req.params.exp_id);
+
+        // Splice out of array
+        profile.experience.splice(removeIndex, 1);
+
+        // Save
         profile.save().then(profile => res.json(profile));
       })
       .catch(err => res.status(400).json(err));
@@ -255,7 +265,16 @@ router.delete(
           return res.status(404).json(errors);
         }
 
-        _.remove(profile.education, exp => exp.id === req.params.edu_id);
+        // _.remove(profile.education, exp => exp.id === req.params.edu_id);
+        // profile.save().then(profile => res.json(profile));
+        const removeIndex = profile.education
+          .map(item => item.id)
+          .indexOf(req.params.edu_id);
+
+        // Splice out of array
+        profile.education.splice(removeIndex, 1);
+
+        // Save
         profile.save().then(profile => res.json(profile));
       })
       .catch(err => res.status(400).json(err));

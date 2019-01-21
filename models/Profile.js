@@ -30,7 +30,7 @@ var ProfileSchema = new mongoose.Schema({
   bio: {
     type: String
   },
-  githubUsername: {
+  githubusername: {
     type: String
   },
   experience: [

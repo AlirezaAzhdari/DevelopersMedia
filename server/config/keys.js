@@ -1,7 +1,5 @@
-// var mongoURI =
-//   "mongodb://alireza:ali123@ds129386.mlab.com:29386/developersmedia";
-
-module.exports = {
-  mongoURI: "mongodb://alireza:ali123@ds129386.mlab.com:29386/developersmedia",
-  JWT_SECRET: "adsad1231313asa213441"
-};
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./Keys_Prod");
+} else {
+  module.exports = require("./Keys_dev");
+}

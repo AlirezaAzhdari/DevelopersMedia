@@ -9,11 +9,11 @@ module.exports = function validateProfileInput(data) {
   data.skills = !isEmpty(data.skills) ? data.skills : "";
 
   if (!validator.isLength(data.handle, { min: 4, max: 40 })) {
-    errors.handle = "طول هندل باید بین ۴ تا ۴۰ کاراکتر باشد";
+    errors.handle = "طول نام کاربری باید بین ۴ تا ۴۰ کاراکتر باشد";
   }
 
   if (validator.isEmpty(data.handle)) {
-    errors.handle = "فیلد هندل نمی‌تواند خالی باشد";
+    errors.handle = "فیلد نام کاربری نمی‌تواند خالی باشد";
   }
 
   if (validator.isEmpty(data.status)) {

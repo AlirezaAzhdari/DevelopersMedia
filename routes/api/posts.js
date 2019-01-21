@@ -103,8 +103,17 @@ router.post(
               .json({ alreadyliked: "شما این پست را لایک نکردید" });
           }
 
-          _.remove(post.likes, like => like.user.toString() === req.user.id);
+          // _.remove(post.likes, like => like.user.toString() === req.user.id);
 
+          // post.save().then(post => res.json(post));
+          const removeIndex = post.likes
+            .map(item => item.user.toString())
+            .indexOf(req.user.id);
+
+          // Splice out of array
+          post.likes.splice(removeIndex, 1);
+
+          // Save
           post.save().then(post => res.json(post));
         })
         .catch(err => res.status(404).json({ nopostfound: "no post found" }));
@@ -151,10 +160,19 @@ router.delete(
           });
         }
 
-        _.remove(
-          post.comments,
-          comment => comment._id.toString() === req.params.comment_id
-        );
+        // _.remove(
+        //   post.comments,
+        //   comment => comment._id.toString() === req.params.comment_id
+        // );
+
+        // post.save().then(post => res.json(post));
+
+        const removeIndex = post.comments
+          .map(item => item._id.toString())
+          .indexOf(req.params.comment_id);
+
+        // Splice comment out of array
+        post.comments.splice(removeIndex, 1);
 
         post.save().then(post => res.json(post));
       })

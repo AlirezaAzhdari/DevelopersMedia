@@ -1,4 +1,4 @@
-import { GET_ERROR } from "./types";
+import { GET_ERROR, CLEARE_ERRORS } from "./types";
 import { SET_CURRENT_USER } from "./types";
 
 import jwt_decode from "jwt-decode";
@@ -6,6 +6,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 
 export const registerUser = (userData, history) => dispatch => {
+  dispatch(cleareErrors());
   axios
     .post("/api/users/register", userData)
     .then(res => history.push("/login"))
@@ -18,6 +19,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 export const loginUser = userData => dispatch => {
+  dispatch(cleareErrors());
   axios
     .post("/api/users/login", userData)
     .then(res => {
@@ -50,4 +52,10 @@ export const logoutUser = () => dispatch => {
   localStorage.removeItem("jwtToken");
   setAuthToken(false);
   dispatch(setCurrentUser({}));
+};
+
+export const cleareErrors = () => {
+  return {
+    type: CLEARE_ERRORS
+  };
 };
